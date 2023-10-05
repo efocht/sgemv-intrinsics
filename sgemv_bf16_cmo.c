@@ -16,7 +16,7 @@ typedef union {
         wv = _vel_vor_vvvl(wv, wr, vlen); \
     } while(0)
 
-void sgemv_bf16_rmo(float *y, float *x, bf16 *w, int n, int d, int nd) {
+void sgemv_bf16_cmo(float *y, float *x, bf16 *w, int n, int d, int nd) {
     float zero[2] = {0.0f, 0.0f};
     __vr wv1, wv2, wv3, wv4;
 

@@ -2,7 +2,7 @@
 
 #define VLEN (256)
 
-void sgemv_fp32_rmo(float *y, float *x, float *w, int n, int d, int nd) {
+void sgemv_fp32_cmo(float *y, float *x, float *w, int n, int d, int nd) {
     float zero[2] = {0.0f, 0.0f};
     __vr wv1, wv2, wv3, wv4;
     __vr yt1, yt2, yt3, yt4;
