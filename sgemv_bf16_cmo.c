@@ -18,10 +18,9 @@ typedef union {
 
 void sgemv_bf16_cmo(float *y, float *x, bf16 *w, int n, int d, int nd) {
     float zero[2] = {0.0f, 0.0f};
-    __vr wv1, wv2, wv3, wv4;
+    __vr wv1;
 
     __vr bf16mskl = _vel_vbrdl_vsl(0x00000000ffff0000, VLEN);
-    __vr low32msk = _vel_vbrdl_vsl(0x00000000ffffffff, VLEN);
     packed_fp32 pf1;
 
     for (int i = 0; i < nd; i += 2*VLEN) {
