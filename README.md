@@ -10,17 +10,17 @@ void sgemv_packed_bf16_unr(float *y, float *x, bf16 *w, int n, int d);
 ```
 This function implements `y = w * x`, with `w` being a dense matrix of dimension `d x n`,
 `x` a vector of dimension `n` and `y` the result vector of dimension `d`. The matrix is
-stored in *column memory order*.
+stored in *row memory order*.
 
 ```
-void sgemv_bf16_rmo(float *y, float *x, bf16 *w, int n, int d, int nd);
+void sgemv_bf16_cmo(float *y, float *x, bf16 *w, int n, int d, int nd);
 ```
 This function implements `y = w * x`, with `w` being a dense matrix of dimension `d x n`,
 `x` a vector of dimension `n` and `y` the result vector of dimension `d`. The matrix is
-stored in *row memory order* (!) and the parameter `nd` specifies how many rows shall be
+stored in *column memory order* (!) and the parameter `nd` specifies how many rows shall be
 processed. This is helpful when parallelizing the matrix-vector product with OpenMP.
 
-The files `sgemv_omp.c` and `sgemv_rmo_omp.c` contain examples for OpenMP parallelization
+The files `sgemv_omp.c` and `sgemv_cmo_omp.c` contain examples for OpenMP parallelization
 drivers. They need to be compiler with `ncc` in order to link the optimized OpenMP stack
 from the NEC proprietary compiler.
 
