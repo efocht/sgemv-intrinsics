@@ -2,7 +2,7 @@ CLANG = clang -target ve-linux
 CLFLAGS = -O3 -ffast-math -mvepacked
 NCC = /opt/nec/ve/bin/ncc
 
-all: sgemv_packed_bf16_unr.o sgemv_bf16_cmo.o
+all: sgemv_packed_bf16_unr.o sgemv_bf16_cmo.o sgemv_bf16_cmo_n
 
 sgemv_packed_bf16.o: sgemv_packed_bf16.c
 	$(CLANG) $(CLFLAGS) -o $@ -c $<
