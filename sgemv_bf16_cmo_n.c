@@ -24,6 +24,7 @@ void sgemv_bf16_cmo_n(float *y, float *x, bf16 *w, int n, int d,
     __vr bf16mskl = _vel_vbrdl_vsl(0x00000000ffff0000, VLEN);
     packed_fp32 pf1;
 
+    float *yp = y;
     for (int i = dmin; i < dmax; i += 2*VLEN) {
         const int vl = dmax - i < 2*VLEN ? (dmax - i)>>1 : VLEN;
         __vr yt1 = _vel_vld_vssl(0, &zero[0], vl);
@@ -35,7 +36,8 @@ void sgemv_bf16_cmo_n(float *y, float *x, bf16 *w, int n, int d,
             yt1 = _vel_pvfmad_vvsvl(yt1, pf1.u, wv1, vl);
             wp += d;
         }
-        _vel_vstunc_vssl(yt1, 8, (void *)(y+i+1), vl);
-        _vel_vstlnc_vssl(yt1, 8, (void *)(y+i), vl);
+        _vel_vstunc_vssl(yt1, 8, (void *)(yp+1), vl);
+        _vel_vstlnc_vssl(yt1, 8, (void *)(yp), vl);
+        yp += 2*VLEN;
     }
 }
